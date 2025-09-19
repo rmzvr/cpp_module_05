@@ -1,4 +1,4 @@
-NAME := ex00
+NAME := ex01
 
 SOURCES_DIRECTORY := ./sources
 OBJECTS_DIRECTORY := ./objects
@@ -15,11 +15,10 @@ CPP_VERSION := -std=c++11
 CPP_FLAGS := -Wall -Wextra -Werror -MMD -MP -I$(INCLUDES_DIRECTORY)
 DEBUG_FLAGS := -DDEBUG -g -O0
 
-debug: CPP_FLAGS += $(DEBUG_FLAGS)
-
-debug: re
-
 all: $(NAME)
+
+debug: CPP_FLAGS := $(CPP_FLAGS) $(DEBUG_FLAGS)
+debug: fclean $(NAME)
 
 $(NAME): $(OBJECT_FILES)
 	$(CPP) $(CPP_FLAGS) $(CPP_VERSION) $(OBJECT_FILES) -o $@
