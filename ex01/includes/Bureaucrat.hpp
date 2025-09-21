@@ -4,6 +4,9 @@
 # include <iostream>
 # include <cstdint>
 
+# define LOWEST_GRADE 150
+# define HIGHEST_GRADE 1
+
 class Form;
 
 class Bureaucrat

@@ -5,8 +5,8 @@ Form::Form()
 	:
 	_name("DefaultForm"),
 	_isSigned(false),
-	_gradeToSign(150),
-	_gradeToExecute(150)
+	_gradeToSign(LOWEST_GRADE),
+	_gradeToExecute(LOWEST_GRADE)
 {
 	#ifdef DEBUG
 		std::cout << "Form default constructor called" << std::endl;
@@ -119,11 +119,11 @@ int	Form::validateGrade( Action action, int const& grade )
 		validatedGradeName = "Grade to execute";
 	}
 
-	if (grade < 1)
+	if (grade < HIGHEST_GRADE)
 	{
 		throw Form::GradeTooHighException(validatedGradeName + " too high.");
 	}
-	if (grade > 150)
+	if (grade > LOWEST_GRADE)
 	{
 		throw Form::GradeTooLowException(validatedGradeName + " too low.");
 	}

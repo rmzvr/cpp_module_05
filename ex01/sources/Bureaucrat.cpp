@@ -2,7 +2,7 @@
 #include "Form.hpp"
 
 Bureaucrat::Bureaucrat()
-	: _name("DefaultBureaucrat"), _grade(150)
+	: _name("DefaultBureaucrat"), _grade(LOWEST_GRADE)
 {
 	#ifdef DEBUG
 		std::cout << "Bureaucrat default constructor called" << std::endl;
@@ -53,11 +53,11 @@ std::ostream &operator<<( std::ostream &os, Bureaucrat const &other )
 
 void	Bureaucrat::setGrade( int const& grade )
 {
-	if (grade < 1)
+	if (grade < HIGHEST_GRADE)
 	{
 		throw Bureaucrat::GradeTooHighException("Grade too high.");
 	}
-	if (grade > 150)
+	if (grade > LOWEST_GRADE)
 	{
 		throw Bureaucrat::GradeTooLowException("Grade too low.");
 	}
