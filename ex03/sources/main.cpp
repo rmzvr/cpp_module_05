@@ -6,7 +6,6 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-// Color macros
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 #define GREEN   "\033[32m"
@@ -20,11 +19,10 @@ static void test_makeForm()
 	std::cout << BOLD CYAN "\n===== INTERN MAKEFORM TESTS =====\n\n" RESET;
 
 	Intern someRandomIntern;
-	Bureaucrat high("Alice", 1);   // can sign/execute all
-	Bureaucrat low("Bob", 150);    // cannot sign/execute any
+	Bureaucrat high("Alice", 1);
+	Bureaucrat low("Bob", 150);
 	AForm* form;
 
-	// [1] ShrubberyCreationForm success
 	std::cout << BOLD "[1] " RESET GREEN "ShrubberyCreationForm (success)\n" RESET;
 	try {
 		form = someRandomIntern.makeForm("shrubbery creation", "home");
@@ -39,7 +37,6 @@ static void test_makeForm()
 	}
 	std::cout << MAGENTA "--------------------------------------------\n" RESET;
 
-	// [2] ShrubberyCreationForm fail (low grade)
 	std::cout << BOLD "[2] " RESET YELLOW "ShrubberyCreationForm (sign/exec fail)\n" RESET;
 	try {
 		form = someRandomIntern.makeForm("shrubbery creation", "garden");
@@ -57,7 +54,6 @@ static void test_makeForm()
 	}
 	std::cout << MAGENTA "--------------------------------------------\n" RESET;
 
-	// [3] RobotomyRequestForm success (multiple executions)
 	std::cout << BOLD "[3] " RESET GREEN "RobotomyRequestForm (success, multiple exec)\n" RESET;
 	try {
 		form = someRandomIntern.makeForm("robotomy request", "Bender");
@@ -74,7 +70,6 @@ static void test_makeForm()
 	}
 	std::cout << MAGENTA "--------------------------------------------\n" RESET;
 
-	// [4] RobotomyRequestForm fail (low grade)
 	std::cout << BOLD "[4] " RESET YELLOW "RobotomyRequestForm (sign/exec fail)\n" RESET;
 	try {
 		form = someRandomIntern.makeForm("robotomy request", "TargetX");
@@ -92,7 +87,6 @@ static void test_makeForm()
 	}
 	std::cout << MAGENTA "--------------------------------------------\n" RESET;
 
-	// [5] PresidentialPardonForm success
 	std::cout << BOLD "[5] " RESET GREEN "PresidentialPardonForm (success)\n" RESET;
 	try {
 		form = someRandomIntern.makeForm("presidential pardon", "Marvin");
@@ -107,7 +101,6 @@ static void test_makeForm()
 	}
 	std::cout << MAGENTA "--------------------------------------------\n" RESET;
 
-	// [6] PresidentialPardonForm fail (low grade)
 	std::cout << BOLD "[6] " RESET YELLOW "PresidentialPardonForm (sign/exec fail)\n" RESET;
 	try {
 		form = someRandomIntern.makeForm("presidential pardon", "Arthur");
@@ -125,17 +118,15 @@ static void test_makeForm()
 	}
 	std::cout << MAGENTA "--------------------------------------------\n" RESET;
 
-	// [7] Invalid form name (should throw)
 	std::cout << BOLD "[7] " RESET RED "Invalid form name\n" RESET;
 	try {
 		form = someRandomIntern.makeForm("unknown form", "Target");
-		delete form; // should not reach here
+		delete form;
 	} catch (const std::exception& e) {
 		std::cerr << RED "Caught exception: " << e.what() << RESET "\n";
 	}
 	std::cout << MAGENTA "--------------------------------------------\n" RESET;
 
-	// [8] Edge case: empty target
 	std::cout << BOLD "[8] " RESET CYAN "Empty target\n" RESET;
 	try {
 		form = someRandomIntern.makeForm("shrubbery creation", "");
