@@ -176,5 +176,5 @@ int	main(void)
 	{
 		std::cerr << RED "Caught exception in main: " << e.what() << RESET << '\n';
 	}
-	return (0);
+	return 0;
 }

@@ -146,6 +146,13 @@ static void test_makeForm()
 
 int main()
 {
-	test_makeForm();
+	try
+	{
+		test_makeForm();
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << RED "Caught exception in main: " << e.what() << RESET << '\n';
+	}
 	return 0;
 }
