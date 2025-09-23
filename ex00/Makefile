@@ -1,4 +1,4 @@
-NAME := ex01
+NAME := ex00
 
 SOURCES_DIRECTORY := ./sources
 OBJECTS_DIRECTORY := ./objects
