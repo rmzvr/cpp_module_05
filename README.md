@@ -9,18 +9,6 @@ This module explores exception-safe C++, object relationships, inheritance, poly
 - Use a factory (Intern) with member function pointers
 - Follow the Orthodox Canonical Form across classes
 
-## Build & Run
-```bash
-# Build and run each exercise
-cd ex00 && make && ./ex00
-cd ../ex01 && make && ./ex01
-cd ../ex02 && make && ./ex02
-cd ../ex03 && make && ./ex03
-
-# Optional: debug build (adds -DDEBUG -g -O0)
-make debug
-```
-
 ## Exercise goals and takeaways
 
 ### ex00 — Bureaucrat: invariants and typed exceptions
@@ -118,6 +106,18 @@ AForm* Intern::makeForm(std::string const &name, std::string const &target) {
 ```cpp
 int main() { try { /* run tests */ } catch (const std::exception& e) {
     std::cerr << "Caught exception in main: " << e.what() << '\n'; } }
+```
+
+## Build & Run
+```bash
+# Build and run each exercise
+cd ex00 && make && ./ex00
+cd ../ex01 && make && ./ex01
+cd ../ex02 && make && ./ex02
+cd ../ex03 && make && ./ex03
+
+# Optional: debug build (adds -DDEBUG -g -O0)
+make debug
 ```
 
 ---
