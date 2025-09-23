@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Bureaucrat.hpp"
 
 #define RESET   "\033[0m"
