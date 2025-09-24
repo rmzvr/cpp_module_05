@@ -1,0 +1,21 @@
+# Build artifacts
+objects/
+*.o
+*.d
+ex00/ex00
+ex01/ex01
+ex02/ex02
+ex03/ex03
+
+# Debug symbols
+*.dSYM/
+
+# Editor files
+.vscode/
+.idea/
+*~
+*.swp
+*.swo
+
+# Output files
+*_shrubbery
