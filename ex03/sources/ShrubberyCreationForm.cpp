@@ -56,6 +56,10 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 void ShrubberyCreationForm::executeAction() const
 {
 	std::ofstream outfile(this->getTarget() + "_shrubbery");
+	if (!outfile.is_open())
+	{
+		throw std::runtime_error("Could not open file");
+	}
 
 	std::random_device				rd;
 	std::mt19937					gen(rd());
