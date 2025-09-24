@@ -8,6 +8,34 @@
 #define MAGENTA "\033[35m"
 #define BOLD    "\033[1m"
 
+static void copy_and_assignment_tests()
+{
+	std::cout << BOLD CYAN "\n===== COPY & ASSIGNMENT TESTS =====\n\n" RESET;
+
+	std::cout << BOLD "[1] " RESET GREEN "Copy constructor\n" RESET;
+	Bureaucrat original("Eve", 42);
+	std::cout << CYAN "Original: " RESET << original << "\n";
+	Bureaucrat copy(original);
+	std::cout << CYAN "Copy:     " RESET << copy << "\n";
+	std::cout << MAGENTA "--------------------------------------------\n" RESET;
+
+	std::cout << BOLD "[2] " RESET GREEN "Assignment operator\n" RESET;
+	Bureaucrat assigned("Frank", 100);
+	std::cout << CYAN "Before assignment, assigned: " RESET << assigned << "\n";
+	assigned = original;
+	std::cout << CYAN "After assignment, assigned: " RESET << assigned << "\n";
+	std::cout << MAGENTA "--------------------------------------------\n" RESET;
+
+	std::cout << BOLD "[3] " RESET CYAN "Destructor test (observe output on scope exit)\n" RESET;
+	{
+		Bureaucrat temp("Grace", 75);
+		std::cout << CYAN "Temp Bureaucrat inside block: " RESET << temp << "\n";
+	}
+	std::cout << CYAN "Exited block\n" RESET;
+	std::cout << MAGENTA "--------------------------------------------\n" RESET;
+	std::cout << BOLD CYAN "\n===== END OF COPY & ASSIGNMENT TESTS =====\n" RESET;
+}
+
 static void grade_tests()
 {
 	std::cout << BOLD CYAN "\n===== GRADE TESTS =====\n\n" RESET;
@@ -101,34 +129,6 @@ static void grade_tests()
 	std::cout << MAGENTA "--------------------------------------------\n" RESET;
 
 	std::cout << BOLD CYAN "\n===== END OF GRADE TESTS =====\n" RESET;
-}
-
-static void copy_and_assignment_tests()
-{
-	std::cout << BOLD CYAN "\n===== COPY & ASSIGNMENT TESTS =====\n\n" RESET;
-
-	std::cout << BOLD "[1] " RESET GREEN "Copy constructor\n" RESET;
-	Bureaucrat original("Eve", 42);
-	std::cout << CYAN "Original: " RESET << original << "\n";
-	Bureaucrat copy(original);
-	std::cout << CYAN "Copy:     " RESET << copy << "\n";
-	std::cout << MAGENTA "--------------------------------------------\n" RESET;
-
-	std::cout << BOLD "[2] " RESET GREEN "Assignment operator\n" RESET;
-	Bureaucrat assigned("Frank", 100);
-	std::cout << CYAN "Before assignment, assigned: " RESET << assigned << "\n";
-	assigned = original;
-	std::cout << CYAN "After assignment, assigned: " RESET << assigned << "\n";
-	std::cout << MAGENTA "--------------------------------------------\n" RESET;
-
-	std::cout << BOLD "[3] " RESET CYAN "Destructor test (observe output on scope exit)\n" RESET;
-	{
-		Bureaucrat temp("Grace", 75);
-		std::cout << CYAN "Temp Bureaucrat inside block: " RESET << temp << "\n";
-	}
-	std::cout << CYAN "Exited block\n" RESET;
-	std::cout << MAGENTA "--------------------------------------------\n" RESET;
-	std::cout << BOLD CYAN "\n===== END OF COPY & ASSIGNMENT TESTS =====\n" RESET;
 }
 
 int main()

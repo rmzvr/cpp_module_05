@@ -23,10 +23,24 @@ static void	concrete_form_tests()
 		std::cout << CYAN "Bureaucrat before: " RESET << high << "\n";
 		std::cout << CYAN "Form before: " RESET << form << "\n";
 		std::cout << YELLOW "Trying to sign...\n" RESET;
-		high.signForm(form);
+		try
+		{
+			high.signForm(form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Caught exception: " << e.what() << RESET "\n";
+		}
 		std::cout << CYAN "Form after sign: " RESET << form << "\n";
 		std::cout << YELLOW "Trying to execute...\n" RESET;
-		high.executeForm(form);
+		try
+		{
+			high.executeForm(form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Caught exception: " << e.what() << RESET "\n";
+		}
 		std::cout << CYAN "Bureaucrat after: " RESET << high << "\n";
 		std::cout << MAGENTA "--------------------------------------------\n" RESET;
 	}
@@ -56,7 +70,14 @@ static void	concrete_form_tests()
 		std::cout << CYAN "Bureaucrat: " RESET << low << "\n";
 		std::cout << CYAN "Form: " RESET << form << "\n";
 		std::cout << YELLOW "Trying to sign (should fail)...\n" RESET;
-		low.signForm(form);
+		try
+		{
+			low.signForm(form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Caught exception: " << e.what() << RESET "\n";
+		}
 		std::cout << CYAN "Form after sign attempt: " RESET << form << "\n";
 		std::cout << YELLOW "Trying to execute (should fail)...\n" RESET;
 		try
@@ -77,12 +98,26 @@ static void	concrete_form_tests()
 		std::cout << CYAN "Bureaucrat: " RESET << mid << "\n";
 		std::cout << CYAN "Form: " RESET << form << "\n";
 		std::cout << YELLOW "Trying to sign...\n" RESET;
-		mid.signForm(form);
+		try
+		{
+			mid.signForm(form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Caught exception: " << e.what() << RESET "\n";
+		}
 		std::cout << CYAN "Form after sign: " RESET << form << "\n";
 		for (int i = 0; i < 5; i++)
 		{
 			std::cout << YELLOW "Execution attempt #" << (i + 1) << "...\n" RESET;
-			mid.executeForm(form);
+			try
+			{
+				mid.executeForm(form);
+			}
+			catch (const std::exception& e)
+			{
+				std::cerr << RED "Caught exception: " << e.what() << RESET "\n";
+			}
 		}
 		std::cout << MAGENTA "--------------------------------------------\n" RESET;
 	}
@@ -94,7 +129,14 @@ static void	concrete_form_tests()
 		std::cout << CYAN "Bureaucrat: " RESET << low << "\n";
 		std::cout << CYAN "Form: " RESET << form << "\n";
 		std::cout << YELLOW "Trying to sign (should fail)...\n" RESET;
-		low.signForm(form);
+		try
+		{
+			low.signForm(form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Caught exception: " << e.what() << RESET "\n";
+		}
 		std::cout << CYAN "Form after sign attempt: " RESET << form << "\n";
 		std::cout << YELLOW "Trying to execute (should fail)...\n" RESET;
 		try
@@ -115,10 +157,24 @@ static void	concrete_form_tests()
 		std::cout << CYAN "Bureaucrat before: " RESET << prez << "\n";
 		std::cout << CYAN "Form before: " RESET << form << "\n";
 		std::cout << YELLOW "Trying to sign...\n" RESET;
-		prez.signForm(form);
+		try
+		{
+			prez.signForm(form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Caught exception: " << e.what() << RESET "\n";
+		}
 		std::cout << CYAN "Form after sign: " RESET << form << "\n";
 		std::cout << YELLOW "Trying to execute...\n" RESET;
-		prez.executeForm(form);
+		try
+		{
+			prez.executeForm(form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Caught exception: " << e.what() << RESET "\n";
+		}
 		std::cout << CYAN "Bureaucrat after: " RESET << prez << "\n";
 		std::cout << MAGENTA "--------------------------------------------\n" RESET;
 	}
@@ -148,7 +204,14 @@ static void	concrete_form_tests()
 		std::cout << CYAN "Bureaucrat: " RESET << low << "\n";
 		std::cout << CYAN "Form: " RESET << form << "\n";
 		std::cout << YELLOW "Trying to sign (should fail)...\n" RESET;
-		low.signForm(form);
+		try
+		{
+			low.signForm(form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Caught exception: " << e.what() << RESET "\n";
+		}
 		std::cout << CYAN "Form after sign attempt: " RESET << form << "\n";
 		std::cout << YELLOW "Trying to execute (should fail)...\n" RESET;
 		try

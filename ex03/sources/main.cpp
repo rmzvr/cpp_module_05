@@ -22,123 +22,277 @@ static void test_makeForm()
 	Bureaucrat low("Bob", 150);
 	AForm* form;
 
-	std::cout << BOLD "[1] " RESET GREEN "ShrubberyCreationForm (success)\n" RESET;
-	try {
-		form = someRandomIntern.makeForm("shrubbery creation", "home");
-		std::cout << CYAN "Signing... " RESET;
-		high.signForm(*form);
-		std::cout << CYAN "Executing... " RESET;
-		high.executeForm(*form);
-		delete form;
-		std::cout << GREEN "OK\n" RESET;
-	} catch (const std::exception& e) {
-		std::cerr << RED "Exception: " << e.what() << RESET "\n";
-	}
-	std::cout << MAGENTA "--------------------------------------------\n" RESET;
-
-	std::cout << BOLD "[2] " RESET YELLOW "ShrubberyCreationForm (sign/exec fail)\n" RESET;
-	try {
-		form = someRandomIntern.makeForm("shrubbery creation", "garden");
-		std::cout << CYAN "Signing... " RESET;
-		low.signForm(*form);
-		std::cout << CYAN "Executing... " RESET;
-		try {
-			low.executeForm(*form);
-		} catch (const std::exception& e) {
-			std::cerr << RED "Caught exception on exec: " << e.what() << RESET "\n";
+	{
+		std::cout << BOLD "[1] " RESET GREEN "ShrubberyCreationForm (success)\n" RESET;
+		form = nullptr;
+		try
+		{
+			form = someRandomIntern.makeForm("shrubbery creation", "home");
 		}
-		delete form;
-	} catch (const std::exception& e) {
-		std::cerr << RED "Exception: " << e.what() << RESET "\n";
-	}
-	std::cout << MAGENTA "--------------------------------------------\n" RESET;
-
-	std::cout << BOLD "[3] " RESET GREEN "RobotomyRequestForm (success, multiple exec)\n" RESET;
-	try {
-		form = someRandomIntern.makeForm("robotomy request", "Bender");
-		std::cout << CYAN "Signing... " RESET;
-		high.signForm(*form);
-		for (int i = 0; i < 3; ++i) {
-			std::cout << CYAN "Executing (" << (i+1) << ")... " RESET;
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception creating form: " << e.what() << RESET "\n";
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
+		try
+		{
+			std::cout << CYAN "Signing... " RESET;
+			high.signForm(*form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception signing form: " << e.what() << RESET "\n";
+			delete form;
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
+		try
+		{
+			std::cout << CYAN "Executing... " RESET;
 			high.executeForm(*form);
 		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception executing form: " << e.what() << RESET "\n";
+			delete form;
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
 		delete form;
 		std::cout << GREEN "OK\n" RESET;
-	} catch (const std::exception& e) {
-		std::cerr << RED "Exception: " << e.what() << RESET "\n";
+		std::cout << MAGENTA "--------------------------------------------\n" RESET;
 	}
-	std::cout << MAGENTA "--------------------------------------------\n" RESET;
 
-	std::cout << BOLD "[4] " RESET YELLOW "RobotomyRequestForm (sign/exec fail)\n" RESET;
-	try {
-		form = someRandomIntern.makeForm("robotomy request", "TargetX");
+	{
+		std::cout << BOLD "[2] " RESET YELLOW "ShrubberyCreationForm (sign/exec fail)\n" RESET;
+		form = nullptr;
+		try
+		{
+			form = someRandomIntern.makeForm("shrubbery creation", "garden");
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception creating form: " << e.what() << RESET "\n";
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
 		std::cout << CYAN "Signing... " RESET;
 		low.signForm(*form);
-		std::cout << CYAN "Executing... " RESET;
-		try {
+		
+		try
+		{
+			std::cout << CYAN "Executing... " RESET;
 			low.executeForm(*form);
-		} catch (const std::exception& e) {
+		}
+		catch (const std::exception& e)
+		{
 			std::cerr << RED "Caught exception on exec: " << e.what() << RESET "\n";
 		}
 		delete form;
-	} catch (const std::exception& e) {
-		std::cerr << RED "Exception: " << e.what() << RESET "\n";
+		std::cout << MAGENTA "--------------------------------------------\n" RESET;
 	}
-	std::cout << MAGENTA "--------------------------------------------\n" RESET;
 
-	std::cout << BOLD "[5] " RESET GREEN "PresidentialPardonForm (success)\n" RESET;
-	try {
-		form = someRandomIntern.makeForm("presidential pardon", "Marvin");
-		std::cout << CYAN "Signing... " RESET;
-		high.signForm(*form);
-		std::cout << CYAN "Executing... " RESET;
-		high.executeForm(*form);
+	{
+		std::cout << BOLD "[3] " RESET GREEN "RobotomyRequestForm (success, multiple exec)\n" RESET;
+		form = nullptr;
+		try
+		{
+			form = someRandomIntern.makeForm("robotomy request", "Bender");
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception creating form: " << e.what() << RESET "\n";
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
+		try
+		{
+			std::cout << CYAN "Signing... " RESET;
+			high.signForm(*form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception signing form: " << e.what() << RESET "\n";
+			delete form;
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
+		for (int i = 0; i < 3; ++i) {
+			try
+			{
+				std::cout << CYAN "Executing (" << (i+1) << ")... " RESET;
+				high.executeForm(*form);
+			}
+			catch (const std::exception& e)
+			{
+				std::cerr << RED "Exception executing form: " << e.what() << RESET "\n";
+				delete form;
+				std::cout << MAGENTA "--------------------------------------------\n" RESET;
+				return;
+			}
+		}
 		delete form;
 		std::cout << GREEN "OK\n" RESET;
-	} catch (const std::exception& e) {
-		std::cerr << RED "Exception: " << e.what() << RESET "\n";
+		std::cout << MAGENTA "--------------------------------------------\n" RESET;
 	}
-	std::cout << MAGENTA "--------------------------------------------\n" RESET;
 
-	std::cout << BOLD "[6] " RESET YELLOW "PresidentialPardonForm (sign/exec fail)\n" RESET;
-	try {
-		form = someRandomIntern.makeForm("presidential pardon", "Arthur");
+	{
+		std::cout << BOLD "[4] " RESET YELLOW "RobotomyRequestForm (sign/exec fail)\n" RESET;
+		form = nullptr;
+		try
+		{
+			form = someRandomIntern.makeForm("robotomy request", "TargetX");
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception creating form: " << e.what() << RESET "\n";
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
 		std::cout << CYAN "Signing... " RESET;
 		low.signForm(*form);
-		std::cout << CYAN "Executing... " RESET;
-		try {
+		
+		try
+		{
+			std::cout << CYAN "Executing... " RESET;
 			low.executeForm(*form);
-		} catch (const std::exception& e) {
+		}
+		catch (const std::exception& e)
+		{
 			std::cerr << RED "Caught exception on exec: " << e.what() << RESET "\n";
 		}
 		delete form;
-	} catch (const std::exception& e) {
-		std::cerr << RED "Exception: " << e.what() << RESET "\n";
+		std::cout << MAGENTA "--------------------------------------------\n" RESET;
 	}
-	std::cout << MAGENTA "--------------------------------------------\n" RESET;
 
-	std::cout << BOLD "[7] " RESET RED "Invalid form name\n" RESET;
-	try {
-		form = someRandomIntern.makeForm("unknown form", "Target");
-		delete form;
-	} catch (const std::exception& e) {
-		std::cerr << RED "Caught exception: " << e.what() << RESET "\n";
-	}
-	std::cout << MAGENTA "--------------------------------------------\n" RESET;
-
-	std::cout << BOLD "[8] " RESET CYAN "Empty target\n" RESET;
-	try {
-		form = someRandomIntern.makeForm("shrubbery creation", "");
-		std::cout << CYAN "Signing... " RESET;
-		high.signForm(*form);
-		std::cout << CYAN "Executing... " RESET;
-		high.executeForm(*form);
+	{
+		std::cout << BOLD "[5] " RESET GREEN "PresidentialPardonForm (success)\n" RESET;
+		form = nullptr;
+		try
+		{
+			form = someRandomIntern.makeForm("presidential pardon", "Marvin");
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception creating form: " << e.what() << RESET "\n";
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
+		try
+		{
+			std::cout << CYAN "Signing... " RESET;
+			high.signForm(*form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception signing form: " << e.what() << RESET "\n";
+			delete form;
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
+		try
+		{
+			std::cout << CYAN "Executing... " RESET;
+			high.executeForm(*form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception executing form: " << e.what() << RESET "\n";
+			delete form;
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
 		delete form;
 		std::cout << GREEN "OK\n" RESET;
-	} catch (const std::exception& e) {
-		std::cerr << RED "Exception: " << e.what() << RESET "\n";
+		std::cout << MAGENTA "--------------------------------------------\n" RESET;
 	}
-	std::cout << MAGENTA "--------------------------------------------\n" RESET;
+
+	{
+		std::cout << BOLD "[6] " RESET YELLOW "PresidentialPardonForm (sign/exec fail)\n" RESET;
+		form = nullptr;
+		try
+		{
+			form = someRandomIntern.makeForm("presidential pardon", "Arthur");
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception creating form: " << e.what() << RESET "\n";
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
+		std::cout << CYAN "Signing... " RESET;
+		low.signForm(*form);
+		
+		try
+		{
+			std::cout << CYAN "Executing... " RESET;
+			low.executeForm(*form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Caught exception on exec: " << e.what() << RESET "\n";
+		}
+		delete form;
+		std::cout << MAGENTA "--------------------------------------------\n" RESET;
+	}
+
+	{
+		std::cout << BOLD "[7] " RESET RED "Invalid form name\n" RESET;
+		form = nullptr;
+		try
+		{
+			form = someRandomIntern.makeForm("unknown form", "Target");
+			delete form;
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Caught exception: " << e.what() << RESET "\n";
+		}
+		std::cout << MAGENTA "--------------------------------------------\n" RESET;
+	}
+
+	{
+		std::cout << BOLD "[8] " RESET CYAN "Empty target\n" RESET;
+		form = nullptr;
+		try
+		{
+			form = someRandomIntern.makeForm("shrubbery creation", "");
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception creating form: " << e.what() << RESET "\n";
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
+		try
+		{
+			std::cout << CYAN "Signing... " RESET;
+			high.signForm(*form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception signing form: " << e.what() << RESET "\n";
+			delete form;
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
+		try
+		{
+			std::cout << CYAN "Executing... " RESET;
+			high.executeForm(*form);
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << RED "Exception executing form: " << e.what() << RESET "\n";
+			delete form;
+			std::cout << MAGENTA "--------------------------------------------\n" RESET;
+			return;
+		}
+		delete form;
+		std::cout << GREEN "OK\n" RESET;
+		std::cout << MAGENTA "--------------------------------------------\n" RESET;
+	}
 
 	std::cout << BOLD CYAN "\n===== END OF MAKEFORM TESTS =====\n" RESET;
 }
